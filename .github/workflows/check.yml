@@ -14,9 +14,9 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          # GTA4XL_EUR_OPEN
-          - model: "SM-P615"
-            csc: "XEF"
+          # A34X_EUR_OPEN
+          - model: "SM-A346B"
+            csc: "EUX"
             omc: "OXM"
 
     steps:
