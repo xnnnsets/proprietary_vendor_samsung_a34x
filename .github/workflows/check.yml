@@ -62,9 +62,10 @@ jobs:
         if: env.need_update == 1
         run: |
           sudo apt-get update
-          sudo apt-get install -y liblz4-tool zip simg2img f2fs-tools
+          sudo apt-get install -y liblz4-tool zip simg2img f2fs-tools linux-modules-extra-$(uname -r)
           sudo wget -O /usr/bin/samfirm https://github.com/DavidArsene/samfirm.js/releases/download/v0.3.0/samfirm.js && sudo chmod +x /usr/bin/samfirm
-
+          sudo modprobe erofs f2fs
+      
       - name: Fetch firmware
         if: env.need_update == 1
         run: samfirm -m ${{ matrix.model }} -r ${{ matrix.csc }} -i ${{ matrix.imei }}
@@ -136,8 +137,17 @@ jobs:
           python3 tools/bin/lpunpack.py -p vendor super.img .
           rm super.img
           [[ -e vendor.img ]] && zip ${{ env.latest_shortversion }}_vendor.zip vendor.img
-          [[ -e vendor.img ]] && rm vendor.img
+          #[[ -e vendor.img ]] && rm vendor.img
 
+      - name: Extract TA blobs for TWRP decryption
+        if: env.need_update == 1
+        run: |
+          mkdir vendor_mount
+          sudo mount -o ro vendor.img vendor_mount/
+          tar cvf ${{ env.latest_shortversion }}_TA_blobs.tar vendor_mount/tee/* 
+          sudo umount vendor_mount/
+          [[ -e vendor.img ]] && rm vendor.img
+          
       - name: Extract boot partition
         if: env.need_update == 1
         run: |
