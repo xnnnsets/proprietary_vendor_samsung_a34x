@@ -28,7 +28,7 @@ jobs:
           - model: "SM-A346M"
             csc: "MXO"
             omc: "OWO"
-            imei: "350042731234561"
+            imei: "350650060111117"
 
     steps:
       - name: Checkout repo
