@@ -149,7 +149,9 @@ jobs:
         run: |
           mkdir vendor_mount
           sudo mount -o ro vendor.img vendor_mount/
-          tar cvf ${{ env.latest_shortversion }}_TA_blobs.tar vendor_mount/tee/* 
+          cd vendor_mount/tee
+          tar cvf ../../${{ env.latest_shortversion }}_TA_blobs.tar *
+          cd ../..
           sudo umount vendor_mount/
           [[ -e vendor.img ]] && rm vendor.img
           
@@ -195,4 +197,5 @@ jobs:
             ${{ env.pit_file }}
             ${{ env.latest_shortversion }}_patched_vbmeta.tar
             ${{ env.latest_shortversion }}_vendor.zip
+            ${{ env.latest_shortversion }}_TA_blobs.tar
             boot.img
