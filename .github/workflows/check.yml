@@ -19,6 +19,11 @@ jobs:
             csc: "EUX"
             omc: "OXM"
             imei: "351648447351835"
+          # A34X_SEA_OPEN
+          - model: "SM-A346E"
+            csc: "INS"
+            omc: "ODM"
+            imei: "350386300261830"
 
     steps:
       - name: Checkout repo
