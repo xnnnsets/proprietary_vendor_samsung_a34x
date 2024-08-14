@@ -25,6 +25,11 @@ jobs:
             omc: "ODM"
             imei: "350386300261830"
 
+          - model: "SM-A346M"
+            csc: "MXO"
+            omc: "OWO"
+            imei: "350386300261830"
+
     steps:
       - name: Checkout repo
         uses: actions/checkout@v3
