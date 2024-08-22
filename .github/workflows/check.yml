@@ -18,7 +18,8 @@ jobs:
           - model: "SM-A346B"
             csc: "EUX"
             omc: "OXM"
-            imei: "351648447351835"
+            #imei: "351648447351835"
+            imei: "351648443494191"
           # A34X_SEA_OPEN
           #- model: "SM-A346E"
           #  csc: "INS"
